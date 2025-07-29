@@ -3,18 +3,15 @@ import plotly.express as px
 from google.cloud import bigquery
 import streamlit as st
 import pandas as pd
-import datetime
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-import os
-from dotenv import load_dotenv
+from google.oauth2 import service_account
 
-load_dotenv()
-# Ensure GOOGLE_APPLICATION_CREDENTIALS is set from .env
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["google_service_account"]
+)
 
-# Setup BigQuery client
-client = bigquery.Client()
+client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
 @st.cache_data(ttl=3600*6)  # cache 6 hours
 def get_data():
