@@ -1,0 +1,13 @@
+pandas
+streamlit
+transformers
+torch
+plotly
+psycopg2-binary
+google-cloud-bigquery
+dotenv
+beautifulsoup4
+requests
+pandas-gbq
+wordcloud
+matplotlib
